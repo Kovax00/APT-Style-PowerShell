@@ -28,16 +28,15 @@ Version: Compatible con .NET Framework 4.x+
 
 El código carga dinámicamente esta DLL desde el GAC (Global Assembly Cache) sin requerir referencias estáticas en tiempo de compilación.
 
-## Diferencias con PowerShell Convencional
+## Análisis de Binarios para Inyección (Orquestador + API System.Management.Automation)
 
-| Aspecto | powershell.exe | Este PoC |
-|---------|---------------|----------|
-| Proceso ejecutado | `powershell.exe` | Binario custom (ej: `MyApp.exe`) |
-| Detección por nombre de proceso | Trivial | Requiere análisis de DLLs cargadas |
-| Application Whitelisting bypass | No | Sí (si el binario está permitido) |
-| Logging de PowerShell | Sí | Sí (aún genera logs si está habilitado) |
-| AMSI scanning | Sí | Sí (puede ser bypasseado) |
-| Firma digital | Microsoft | Depende del binario host |
+| Binario Host | Beneficios Técnicos y Evasión (Ventaja APT) |
+| :--- | :--- |
+| **explorer.exe** | Es el objetivo principal. Al ser el proceso de la interfaz de usuario, siempre tiene actividad de red y carga muchas DLLs, lo que ayuda a ocultar la carga de `System.Management.Automation.dll`. |
+| **svchost.exe** | Los APTs lo utilizan para camuflar scripts que actúan como servicios persistentes o que realizan tareas de reconocimiento de red bajo la apariencia de servicios del sistema. |
+| **dllhost.exe / msiexec.exe** | Procesos que normalmente tienen una vida corta y realizan tareas de sistema; ideales para inyecciones rápidas que ejecutan un comando de PowerShell y desaparecen sin dejar rastro persistente. |
+| **RuntimeBroker.exe** | Utilizado frecuentemente para evadir sandboxing, ya que es un proceso con permisos específicos de aplicaciones que los EDR suelen monitorear con menos rigor que a los navegadores. |
+| **WmiPrvSE.exe** | Al inyectar aquí, el atacante puede hacer que la actividad de PowerShell parezca una tarea legítima de administración remota o gestión del sistema vía WMI. |
 
 ## Contexto APT
 
