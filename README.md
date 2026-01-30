@@ -76,7 +76,7 @@ T1027    - Obfuscated Files or Information
 ```
 
 ## Uso
-### Importante USAR VM PARA CARGAR EL EXE (no contiene malware pero acostumbra las buenas practicas)
+### 🚨🚧 Importante USAR VM PARA CARGAR EL EXE (no contiene malware pero acostumbra las buenas practicas)
 ```bash
 # Ejecutar el binario compilado
 API-powershell-aptComand.exe
