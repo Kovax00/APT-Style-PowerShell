@@ -75,48 +75,8 @@ T1027    - Obfuscated Files or Information
                    └─> Commands.Clear() (CRÍTICO para evitar estado corrupto)
 ```
 
-### Manejo de Errores
-
-El código implementa limpieza del pipeline en bloques catch para prevenir loops infinitos cuando hay errores de parsing (ej: comillas sin cerrar):
-```cpp
-catch (TargetInvocationException^ tie)
-{
-    clearCommands->Invoke(commands, nullptr);  // Limpieza del pipeline
-    errorStream->Clear();                       // Vaciar streams
-    // ... limpieza de otros streams
-}
-```
-
-Sin esta limpieza, errores de sintaxis dejan el pipeline en estado inconsistente, causando que todos los comandos subsecuentes fallen.
-
-## Compilación
-
-### Requisitos
-
-- Windows 10/11
-- Visual Studio 2019 o superior
-- Componente "C++/CLI support for v142+ build tools"
-- .NET Framework 4.x o superior
-
-### Proceso de Compilación
-
-**Opción 1: Línea de comandos**
-```bash
-cl /clr API-powershell-aptComand.cpp
-```
-
-**Opción 2: Visual Studio**
-1. Crear nuevo proyecto: "CLR Console App (.NET Framework)"
-2. Pegar el código fuente
-3. Compilar: `Ctrl+Shift+B`
-
-### Notas Importantes
-
-- **NO** usar `/EHsc` con `/clr` (son incompatibles)
-- El flag `/clr` es obligatorio para habilitar extensiones C++/CLI
-- El proyecto requiere .NET Framework, no .NET Core/5+
-
 ## Uso
+### Importante USAR VM PARA CARGAR EL EXE (no contiene malware pero acostumbra las buenas practicas)
 ```bash
 # Ejecutar el binario compilado
 API-powershell-aptComand.exe
