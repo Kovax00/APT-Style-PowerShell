@@ -1,8 +1,12 @@
 # APT-Style-PowerShell
 **Proof of Concept** que replica la técnica de evasión avanzada utilizada por **APT35 (Charming Kitten)** en su backdoor "PowerLess" (2021-2022).
-## Descripción Técnica
+<img width="1483" height="882" alt="image" src="https://github.com/user-attachments/assets/b76808b6-7605-4df5-a6ab-68930f11a155" />
 
+## Descripción Técnica
 Este proyecto demuestra la ejecución de comandos PowerShell sin iniciar el proceso `powershell.exe`, utilizando directamente la API de .NET `System.Management.Automation.dll` mediante código C++/CLI.
+
+<img width="1432" height="169" alt="image" src="https://github.com/user-attachments/assets/9046083a-f69c-478b-98e5-da399fbec34f" />
+
 
 ### API Utilizada
 
